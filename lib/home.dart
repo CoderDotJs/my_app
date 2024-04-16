@@ -1,7 +1,9 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:my_app/appbar.dart';
+import 'package:my_app/Body1.dart';
+import 'package:my_app/body2.dart';
+import 'package:my_app/bottom_nav.dart';
+import 'package:my_app/header.dart';
+import 'package:my_app/info.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -10,87 +12,37 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  var _index = 0;
-  void _onItemTapped(int index) {
-    setState(() {
-      _index = index;
-    });
-    switch (index) {
-      case 0:
-        Navigator.pushNamed(context, '/');
-        break;
-      case 1:
-        Navigator.pushNamed(context, '/crypto');
-        break;
-      case 2:
-        Navigator.pushNamed(context, '/portfolio');
-        break;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    void onPress() {
+      return;
+    }
+
     return Scaffold(
       // appBar: const CustomAppBar(),
       body: Container(
           padding: const EdgeInsets.all(30),
           child: Column(children: [
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Icon(Icons.menu, color: Colors.white),
-                Icon(Icons.verified_user_rounded, color: Colors.white)
-              ],
-            ),
+            const Header(),
+            const Info(),
+            const Body1(),
+            const Body2(),
             Container(
-              padding: const EdgeInsets.all(24),
-              child: const Column(
-                textDirection: TextDirection.ltr,
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Hi there!',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 10,
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      'Md Johirul Islam Akash',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  )
-                ],
+              margin: const EdgeInsets.only(top: 20),
+              child: TextButton(
+                style: const ButtonStyle(
+                    foregroundColor: MaterialStatePropertyAll(Colors.white),
+                    backgroundColor: MaterialStatePropertyAll(
+                        Color.fromRGBO(121, 0, 201, 0.5)),
+                    iconSize: MaterialStatePropertyAll(400),
+                    padding: MaterialStatePropertyAll(EdgeInsets.all(20))),
+                onPressed: onPress,
+                child: const Text('Search'),
               ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                  color: Colors.white),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Column(children: [Text('Head'), Text('Botom')]),
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: const BoxDecoration(
-                          color: Color.fromRGBO(121, 0, 201, 0.5),
-                          borderRadius: BorderRadius.all(Radius.circular(100))),
-                      child: const Icon(Icons.update, color: Colors.white),
-                    )
-                  ]),
             )
           ])),
       backgroundColor: const Color.fromRGBO(121, 0, 201, 0.5),
+      bottomNavigationBar: const BottomNav(),
     );
   }
 }
